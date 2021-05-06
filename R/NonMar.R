@@ -73,8 +73,8 @@ function_matrix_denoise=function(res,X,node_ID1,node_ID2,group){
 #' @return \code{B_est} - The estimated coefficient vector of linear predictor.
 #' @return \code{prob} - The predicted probabilities for the test data.
 #' @usage Lasso(xvec,y,xnew,lambda)
+#' @import glmnet
 #' @export
-#' @importFrom glmnet "glmnet"
 #' @importFrom stats "predict"
 
 Lasso=function(xvec,y,xnew,lambda){
