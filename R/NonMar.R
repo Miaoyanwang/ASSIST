@@ -73,8 +73,8 @@ function_matrix_denoise=function(res,X,node_ID1,node_ID2,group){
 #' @return \code{B_est} - The estimated coefficient vector of linear predictor.
 #' @return \code{prob} - The predicted probabilities for the test data.
 #' @usage Lasso(xvec,y,xnew,lambda)
-#' @import glmnet
 #' @export
+#' @importFrom glmnet "glmnet"
 #' @importFrom stats "predict"
 
 Lasso=function(xvec,y,xnew,lambda){
@@ -211,8 +211,8 @@ objective=function(b,yfit,ybar,Weight,type=c("logistic","hinge","binary")){
 #' @return \code{B_est} - An array that collects a series of coefficient matrices for the classifiers used in the algorithm.
 #' @return \code{fitted} - The predicted responses in the test data.
 #' @return \code{sign_fitted} - A matrix that collects a series of predicted signs for the classifiers used in the algorithm.
-#' @usage ASSIST(X,y,X_new=NULL,r,sparse_r,sparse_c,H=10,lambda=0,rho.ini=0.1,min,max)
-#' @references Lee, C., Li, L., Zhang, H., and Wang, M. (2021). Nonparametric Trace Regression via Sign Series Representation. \emph{arXiv preprint arXiv:2105.01783}.
+#' @usage TraceAssist(X,y,X_new=NULL,r,sparse_r,sparse_c,H=10,lambda=0,rho.ini=0.1,min,max)
+#' @references C. Lee, L. Li, H. Zhang, and M. Wang (2021). Nonparametric Trace Regression via Sign Series Representation. \emph{arXiv preprint arXiv:2105.01783}.
 #' @examples
 #' ######### Generate matrices in the training data ################
 #' X = list()
@@ -232,7 +232,7 @@ objective=function(b,yfit,ybar,Weight,type=c("logistic","hinge","binary")){
 #'
 #'
 #' ######### Run ASSIST ############################################
-#' res =ASSIST(X,y,r = 1,sparse_r = 0,sparse_c = 0,min = min(y),max = max(y))
+#' res =TraceAssist(X,y,r = 1,sparse_r = 0,sparse_c = 0,min = min(y),max = max(y))
 #' mean(abs(res$fitted-signal))
 #'
 #'
@@ -249,14 +249,14 @@ objective=function(b,yfit,ybar,Weight,type=c("logistic","hinge","binary")){
 #' }
 #'
 #' ######### Run ASSIST #############################################
-#' res =ASSIST(X,y,X_new,r = 1,sparse_r = 0,sparse_c = 0,min = min(y),max = max(y))
+#' res =TraceAssist(X,y,X_new,r = 1,sparse_r = 0,sparse_c = 0,min = min(y),max = max(y))
 #' mean(abs(res$fitted-y_new))
 #'
 #' @export
 #' @importFrom quadprog "solve.QP"
 #' @importFrom stats "optim"
 
-ASSIST=function(X,y,X_new=NULL,r,sparse_r,sparse_c,H=10,lambda=0,rho.ini=0.1,min,max){
+TraceAssist=function(X,y,X_new=NULL,r,sparse_r,sparse_c,H=10,lambda=0,rho.ini=0.1,min,max){
 
   pred=NULL;d1=dim(X[[1]])[1];d2=dim(X[[1]])[2]
 
@@ -297,7 +297,7 @@ ASSIST=function(X,y,X_new=NULL,r,sparse_r,sparse_c,H=10,lambda=0,rho.ini=0.1,min
 #' @return \code{fitted} - A vector of fitted reponse from estimated classifier.
 #' @return \code{B} - The estimated coefficient matrix of the classifier.
 #' @usage ADMM(X,ybar,Weight,Covariate=NULL,r,srow,scol,lambda=0,rho.ini=1)
-#' @references Lee, C., Li, L., Zhang, H., and Wang, M. (2021). Nonparametric Trace Regression via Sign Series Representation. \emph{arXiv preprint arXiv:2105.01783}.
+#' @references C. Lee, L. Li, H. Zhang, and M. Wang (2021). Nonparametric Trace Regression via Sign Series Representation. \emph{arXiv preprint arXiv:2105.01783}.
 #' @examples
 #' #### Generate matrix predictors  ##########
 #' X = list()
